@@ -3,15 +3,30 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour {
 
-    bool gameHasEnded = false;
+    bool playerHasDied = false;
+    bool levelComplete = false;
+
     public float restartDelay = 3f;
+    //public Material PlayerMat;
+    public GameObject completeLevelUI;
+
+    public void CompleteLevel()
+    {
+        if(!playerHasDied)
+        {
+            Debug.Log("LEVEL COMPLETE");
+            levelComplete = true;
+            completeLevelUI.SetActive(true);
+        }
+    }
 
     public void EndGame()
     {
-        if (!gameHasEnded)
+        if (!playerHasDied)
         {
-            gameHasEnded = true;
+            playerHasDied = true;
             Debug.Log("GAME OVER");
+            //PlayerMat.color.r = 0;
             Invoke("Restart", restartDelay);
         }
     }
