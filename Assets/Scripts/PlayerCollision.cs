@@ -10,11 +10,16 @@ public class PlayerCollision : MonoBehaviour {
         if(collisionInfo.collider.tag == "Obstacle")
         {
             movement.enabled = false;
-            //movement.sidewaysForce = movement.forwardForce = 0;
+            //GetComponent<PlayerMovement>().enabled = false;
+            //Performs the same thing as above but instead automatically grabs
+            //the PlayerMovement script so it does not have to be a variable
             movement.rb.useGravity = false;
             ObstacleRb.useGravity = false;
             movement.rb.AddForce(0, 5, 0);
             ObstacleRb.AddForce(0, 5, 0);
+
+            FindObjectOfType<GameManager>().EndGame();
+            
         }
     }
 

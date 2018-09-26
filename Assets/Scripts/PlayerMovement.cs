@@ -47,5 +47,11 @@ public class PlayerMovement : MonoBehaviour {
         {
             rb.AddForce(-sidewaysForce * Time.deltaTime, 0, 0, ForceMode.VelocityChange);
         }
+
+        //If player falls off platform
+        if(rb.position.x < -8 || rb.position.x > 8)
+        {
+            FindObjectOfType<GameManager>().EndGame();
+        }
     }
 }
