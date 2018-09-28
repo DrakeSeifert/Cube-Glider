@@ -9,6 +9,7 @@ public class GameManager : MonoBehaviour {
     public float restartDelay = 3f;
     //public Material PlayerMat;
     public GameObject completeLevelUI;
+    public GameObject deathOverlay;
 
     public void CompleteLevel()
     {
@@ -26,7 +27,7 @@ public class GameManager : MonoBehaviour {
         {
             playerHasDied = true;
             Debug.Log("GAME OVER");
-            //PlayerMat.color.r = 0;
+            deathOverlay.SetActive(true);
             Invoke("Restart", restartDelay);
         }
     }
