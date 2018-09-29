@@ -51,7 +51,7 @@ public class PlayerMovement : MonoBehaviour {
         //If player falls off platform
         if(rb.position.x < -8 || rb.position.x > 8)
         {
-            FindObjectOfType<GameManager>().EndGame();
+            FindObjectOfType<GameManager>().EndGame("FellOffEdge");
         }
     }
 }

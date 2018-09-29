@@ -18,7 +18,7 @@ public class PlayerCollision : MonoBehaviour {
             movement.rb.AddForce(0, 5, 0);
             ObstacleRb.AddForce(0, 5, 0);
 
-            FindObjectOfType<GameManager>().EndGame();
+            FindObjectOfType<GameManager>().EndGame("BlockCollision");
             
         }
     }

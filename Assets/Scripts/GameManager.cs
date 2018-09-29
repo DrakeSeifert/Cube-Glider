@@ -6,10 +6,17 @@ public class GameManager : MonoBehaviour {
     bool playerHasDied = false;
     bool levelComplete = false;
 
-    public float restartDelay = 3f;
+    private float restartDelay = 2.5f;
     //public Material PlayerMat;
     public GameObject completeLevelUI;
-    public GameObject deathOverlay;
+    public GameObject deathOverlayBlockCollision;
+    public GameObject deathOverlayFellOffEdge;
+    public GameObject startLevel;
+
+    void Start()
+    {
+        startLevel.SetActive(true);
+    }
 
     public void CompleteLevel()
     {
@@ -21,16 +28,40 @@ public class GameManager : MonoBehaviour {
         }
     }
 
-    public void EndGame()
+
+    //deathType:
+        //BlockCollision
+        //FellOffEdge
+    public void EndGame(string deathType)
     {
-        if (!playerHasDied)
+        //Debug.Log(deathType);
+        if (!playerHasDied && !levelComplete)
         {
             playerHasDied = true;
             Debug.Log("GAME OVER");
-            deathOverlay.SetActive(true);
+            switch (deathType)
+            {
+                case "BlockCollision":
+                    deathOverlayBlockCollision.SetActive(true);
+                    break;
+                case "FellOffEdge":
+                    deathOverlayFellOffEdge.SetActive(true);
+                    break;
+            }
             Invoke("Restart", restartDelay);
         }
     }
+
+    //public void EndGame(bool FellOffEdge)
+    //{
+    //    if (!playerHasDied && !levelComplete)
+    //    {
+    //        playerHasDied = true;
+    //        Debug.Log("GAME OVER");
+    //        deathOverlay.SetActive(true);
+    //        Invoke("Restart", restartDelay);
+    //    }
+    //}
 
     void Restart()
     {
