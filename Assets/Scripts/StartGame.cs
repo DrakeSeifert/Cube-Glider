@@ -6,15 +6,20 @@ public class StartGame : MonoBehaviour {
     public GameObject startGameAnimation;
     private float waitTime = 0.7f;
 
-    public void BeginGame()
+    public void BeginGameAndAnimation()
     {
         startGameAnimation.SetActive(true);
-        //SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
-        Invoke("BeginGame2", waitTime);
+        Invoke("LoadNextScene", waitTime);
     }
 
-    void BeginGame2()
+    void LoadNextScene()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
+
+    //public void Quit()
+    //{
+    //    Debug.Log("QUIT");
+    //    Application.Quit();
+    //}
 }
