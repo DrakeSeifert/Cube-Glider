@@ -4,11 +4,13 @@ public class PlayerCollision : MonoBehaviour {
 
     public PlayerMovement movement;
     public Rigidbody ObstacleRb;
+    public Score score;
 
     private void OnCollisionEnter(Collision collisionInfo)
     {
         if(collisionInfo.collider.tag == "Obstacle")
         {
+            score.FreezeScore();
             movement.enabled = false;
             //GetComponent<PlayerMovement>().enabled = false;
                 //Performs the same thing as above but instead automatically grabs

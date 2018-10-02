@@ -9,6 +9,8 @@ public class GameManager : MonoBehaviour {
     private float restartDelay = 2.5f;
 
     public PlayerMovement playerMovement;
+    public Score score;
+    public Transform endTrigger;
 
     //Animations
     public GameObject completeLevelUI;
@@ -31,6 +33,8 @@ public class GameManager : MonoBehaviour {
 
     public void CompleteLevel()
     {
+        score.SetScore(endTrigger.position.z.ToString()); //Top score will consistently be the same value
+        score.FreezeScore();
         if(!playerHasDied)
         {
             levelComplete = true;
@@ -38,7 +42,7 @@ public class GameManager : MonoBehaviour {
         }
     }
 
-    public void startCompleteLevelAnimation()
+    public void StartCompleteLevelAnimation()
     {
         completeLevelUI.SetActive(true);
         PlayerPrefs.SetInt("FirstPlay", 1); //Reset FirstPlay so correct animation displays upon next level load

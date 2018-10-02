@@ -109,7 +109,7 @@ public class PlayerMovement : MonoBehaviour {
         }
         else
         {
-            gameManager.startCompleteLevelAnimation();
+            gameManager.StartCompleteLevelAnimation();
         }
 
         //End game if player falls off platform
