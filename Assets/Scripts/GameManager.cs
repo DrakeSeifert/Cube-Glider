@@ -5,20 +5,23 @@ public class GameManager : MonoBehaviour {
 
     bool playerHasDied = false;
     bool levelComplete = false;
-    //bool firstPlay = true; //Checks if player came from menu screen or if scene was reloaded
 
     private float restartDelay = 2.5f;
+
+    public PlayerMovement playerMovement;
+
+    //Animations
     public GameObject completeLevelUI;
     public GameObject deathOverlayBlockCollision;
     public GameObject deathOverlayFellOffEdge;
     public GameObject startLevel;
-    public GameObject FirstPlayStartLevel;
+    public GameObject firstPlayStartLevel;
 
     void Start()
     {
         if(PlayerPrefs.GetInt("FirstPlay") == 1)
         {
-            FirstPlayStartLevel.SetActive(true);
+            firstPlayStartLevel.SetActive(true);
             PlayerPrefs.SetInt("FirstPlay", 0);
         } else
         {
@@ -31,11 +34,15 @@ public class GameManager : MonoBehaviour {
         if(!playerHasDied)
         {
             levelComplete = true;
-            completeLevelUI.SetActive(true);
-            PlayerPrefs.SetInt("FirstPlay", 1); //Reset FirstPlay so correct animation displays upon next level load
+            playerMovement.StartRewind();
         }
     }
 
+    public void startCompleteLevelAnimation()
+    {
+        completeLevelUI.SetActive(true);
+        PlayerPrefs.SetInt("FirstPlay", 1); //Reset FirstPlay so correct animation displays upon next level load
+    }
 
     //deathType:
         //BlockCollision
@@ -45,7 +52,6 @@ public class GameManager : MonoBehaviour {
         if (!playerHasDied && !levelComplete)
         {
             playerHasDied = true;
-            Debug.Log("GAME OVER");
             switch (deathType)
             {
                 case "BlockCollision":
