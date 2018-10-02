@@ -5,26 +5,34 @@ public class GameManager : MonoBehaviour {
 
     bool playerHasDied = false;
     bool levelComplete = false;
+    //bool firstPlay = true; //Checks if player came from menu screen or if scene was reloaded
 
     private float restartDelay = 2.5f;
-    //public Material PlayerMat;
     public GameObject completeLevelUI;
     public GameObject deathOverlayBlockCollision;
     public GameObject deathOverlayFellOffEdge;
     public GameObject startLevel;
+    public GameObject FirstPlayStartLevel;
 
     void Start()
     {
-        startLevel.SetActive(true);
+        if(PlayerPrefs.GetInt("FirstPlay") == 1)
+        {
+            FirstPlayStartLevel.SetActive(true);
+            PlayerPrefs.SetInt("FirstPlay", 0);
+        } else
+        {
+            startLevel.SetActive(true);
+        }
     }
 
     public void CompleteLevel()
     {
         if(!playerHasDied)
         {
-            Debug.Log("LEVEL COMPLETE");
             levelComplete = true;
             completeLevelUI.SetActive(true);
+            PlayerPrefs.SetInt("FirstPlay", 1); //Reset FirstPlay so correct animation displays upon next level load
         }
     }
 
@@ -34,7 +42,6 @@ public class GameManager : MonoBehaviour {
         //FellOffEdge
     public void EndGame(string deathType)
     {
-        //Debug.Log(deathType);
         if (!playerHasDied && !levelComplete)
         {
             playerHasDied = true;
@@ -51,17 +58,6 @@ public class GameManager : MonoBehaviour {
             Invoke("Restart", restartDelay);
         }
     }
-
-    //public void EndGame(bool FellOffEdge)
-    //{
-    //    if (!playerHasDied && !levelComplete)
-    //    {
-    //        playerHasDied = true;
-    //        Debug.Log("GAME OVER");
-    //        deathOverlay.SetActive(true);
-    //        Invoke("Restart", restartDelay);
-    //    }
-    //}
 
     void Restart()
     {
