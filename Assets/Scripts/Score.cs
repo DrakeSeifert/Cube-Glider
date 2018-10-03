@@ -24,4 +24,13 @@ public class Score : MonoBehaviour {
         scoreText.text = score;
     }
 
+    public int GetScoreInt()
+    {
+        return int.Parse(scoreText.text);
+    }
+
+    public string GetScoreString()
+    {
+        return scoreText.text;
+    }
 }

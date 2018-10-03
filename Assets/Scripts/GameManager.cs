@@ -10,6 +10,7 @@ public class GameManager : MonoBehaviour {
 
     public PlayerMovement playerMovement;
     public Score score;
+    public HighScore highScore;
     public Transform endTrigger;
 
     //Animations
@@ -25,6 +26,7 @@ public class GameManager : MonoBehaviour {
         {
             firstPlayStartLevel.SetActive(true);
             PlayerPrefs.SetInt("FirstPlay", 0);
+            PlayerPrefs.SetInt("HighScore", 0);
         } else
         {
             startLevel.SetActive(true);
@@ -33,11 +35,16 @@ public class GameManager : MonoBehaviour {
 
     public void CompleteLevel()
     {
-        score.SetScore(endTrigger.position.z.ToString()); //Top score will consistently be the same value
-        score.FreezeScore();
+        //Rewind only if player hasn't crossed the finish line just after a collision
         if(!playerHasDied)
         {
             levelComplete = true;
+
+            //Adjust scores
+            score.SetScore(endTrigger.position.z.ToString()); //Top score will consistently be the same value
+            score.FreezeScore();
+            highScore.SetNewHighScore(score.GetScoreInt());
+
             playerMovement.StartRewind();
         }
     }
@@ -65,6 +72,7 @@ public class GameManager : MonoBehaviour {
                     deathOverlayFellOffEdge.SetActive(true);
                     break;
             }
+            highScore.SetNewHighScore(score.GetScoreInt());
             Invoke("Restart", restartDelay);
         }
     }
