@@ -41,7 +41,7 @@ public class GameManager : MonoBehaviour {
             levelComplete = true;
 
             //Adjust scores
-            score.SetScore(endTrigger.position.z.ToString()); //Top score will consistently be the same value
+            score.SetScore(1000.ToString()); //Top score will consistently be the same value
             score.FreezeScore();
             highScore.SetNewHighScore(score.GetScoreInt());
 
