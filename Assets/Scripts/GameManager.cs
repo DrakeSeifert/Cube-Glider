@@ -45,6 +45,9 @@ public class GameManager : MonoBehaviour {
             score.FreezeScore();
             highScore.SetNewHighScore(score.GetScoreInt());
 
+            //Save player progress
+            PlayerPrefs.SetInt("LevelCompleted", SceneManager.GetSceneByName("Level01").buildIndex);
+
             playerMovement.StartRewind();
         }
     }
@@ -55,9 +58,6 @@ public class GameManager : MonoBehaviour {
         PlayerPrefs.SetInt("FirstPlay", 1); //Reset FirstPlay so correct animation displays upon next level load
     }
 
-    //deathType:
-        //BlockCollision
-        //FellOffEdge
     public void EndGame(string deathType)
     {
         if (!playerHasDied && !levelComplete)
@@ -80,7 +80,5 @@ public class GameManager : MonoBehaviour {
     void Restart()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
-        //SceneManager.LoadScene("Level01");
-            //If you want to load a specific scene
     }
 }
