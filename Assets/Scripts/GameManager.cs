@@ -6,7 +6,7 @@ public class GameManager : MonoBehaviour {
     bool playerHasDied = false;
     bool levelComplete = false;
 
-    private float restartDelay = 2.5f;
+    private float restartDelay = 2.0f;
     public int levelNumber = 0;
 
     public PlayerMovement playerMovement;
