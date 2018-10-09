@@ -16,10 +16,18 @@ public class StartGame : MonoBehaviour {
             levelName = level.ToString();
 
         //Check that player is eligible to play selected level
-        if (PlayerPrefs.GetInt("LevelCompleted") >= level - 1 && Application.CanStreamedLevelBeLoaded("Level" + levelName))
+        if (PlayerPrefs.GetInt("LevelCompleted") >= level - 1)
         {
-            startGameAnimation.SetActive(true);
-            Invoke("LoadNextScene", waitTime);
+            //Testing
+            if (Application.CanStreamedLevelBeLoaded("Level" + levelName))
+            {
+                startGameAnimation.SetActive(true);
+                Invoke("LoadNextScene", waitTime);
+            }
+            else
+            {
+                Debug.Log("Error: Level " + level + " does not exist");
+            }
         }
         else
         {

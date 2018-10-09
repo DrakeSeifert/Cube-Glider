@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour {
@@ -7,6 +7,7 @@ public class GameManager : MonoBehaviour {
     bool levelComplete = false;
 
     private float restartDelay = 2.5f;
+    public int levelNumber = 0;
 
     public PlayerMovement playerMovement;
     public Score score;
@@ -46,7 +47,7 @@ public class GameManager : MonoBehaviour {
             highScore.SetNewHighScore(score.GetScoreInt());
 
             //Save player progress
-            PlayerPrefs.SetInt("LevelCompleted", SceneManager.GetSceneByName("Level01").buildIndex);
+            PlayerPrefs.SetInt("LevelCompleted", levelNumber);
 
             playerMovement.StartRewind();
         }

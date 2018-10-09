@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class MenuManager : MonoBehaviour {
@@ -12,7 +12,7 @@ public class MenuManager : MonoBehaviour {
         }
 
         //TESTING
-        PlayerPrefs.SetInt("LevelCompleted", 0);
+        //PlayerPrefs.SetInt("LevelCompleted", 0);
         Debug.Log("LevelCompleted: " + PlayerPrefs.GetInt("LevelCompleted"));
     }
 
